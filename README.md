@@ -6,8 +6,8 @@ The API has two main functions:
 1. Capture real-time phone call events from an external system, "System B", and store them in a database.
 b. Provide access to comprehensive call history for a given phone number.
 
-**Part 1 - Event Processing:
-**
+**Part 1 - Event Processing:**
+
 Implement an API endpoint to process events with these attributes:
 event_id: Unique identifier for the event.
 call_id: Unique identifier for the call.
@@ -16,8 +16,8 @@ calling_number: Calling phone number in E.164 format.
 called_number: Called phone number in E.164 format.
 created_at: Date of the event.
 
-**Part 2 - Call History:
-**
+**Part 2 - Call History:**
+
 Expose call history for a given phone number.
 Each record includes:
 Call time.
