@@ -8,13 +8,13 @@ The API has two main functions:
 
 **Part 1 - Event Processing:**
 
-Implement an API endpoint to process events with these attributes:
-event_id: Unique identifier for the event.
-call_id: Unique identifier for the call.
-event: Values can be INITIATE, ANSWER, or DISCONNECT.
-calling_number: Calling phone number in E.164 format.
-called_number: Called phone number in E.164 format.
-created_at: Date of the event.
+Implement an API endpoint to process events for the following attributes:
+- event_id: Unique identifier for the event.
+- call_id: Unique identifier for the call.
+- event: Values can be INITIATE, ANSWER, or DISCONNECT.
+- calling_number: Calling phone number in E.164 format.
+- called_number: Called phone number in E.164 format.
+- created_at: Date of the event.
 
 **Part 2 - Call History:**
 
