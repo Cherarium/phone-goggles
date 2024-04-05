@@ -4,7 +4,7 @@ A RESTful API using Python/Django to manage phone call states.
 The API has two main functions:
 
 1. Capture real-time phone call events from an external system, "System B", and store them in a database.
-b. Provide access to comprehensive call history for a given phone number.
+2. Provide access to comprehensive call history for a given phone number.
 
 **Part 1 - Event Processing:**
 
