@@ -24,7 +24,7 @@ This approach offers several advantages:
 2. Provide a detailed call history for any given phone number.
    
 ## Part 1 - Event Processing
-Implement an API endpoint to handle the following event attributes:
+Implements an API endpoint to handle the following event attributes:
 
 - event_id: Unique identifier for the event.
 - call_id: Unique identifier for the call.
@@ -48,7 +48,7 @@ In a real-world scenario, the duration field would primarily be meaningful for `
 
 
 ## Part 2 - Call History
-Expose the call history for a phone number, including:
+Exposes the call history for a phone number, including:
 
 - Call time.
 - Counterparty phone number.
@@ -154,3 +154,130 @@ The API will be accessible at: http://127.0.0.1:8000/admin/ after logging in wit
 ## References
 Django Documentation: https://docs.djangoproject.com/en/stable/
 E.164 Format Specification: https://en.wikipedia.org/wiki/E.164
+
+
+## CODE ANALYSIS
+**create_test_data.py**
+This script creates random test data for the `CallEvent` model, simulating various phone call scenarios for testing the API.
+
+```
+import os
+import random
+import django
+import uuid
+
+# Set the Django settings module
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'py_phone_call_manager.settings')
+django.setup()
+
+# Import the CallEvent model from the calls app
+from calls.models import CallEvent
+
+# Import Faker for generating fake data
+from faker import Faker
+
+# Initialize Faker
+fake = Faker()
+
+# Function to create test data
+def create_test_data():
+    for _ in range(50):  # Create 50 random call events for testing
+        event = random.choice(['INITIATE', 'ANSWER', 'DISCONNECT'])  # Choose a random event type
+        calling_number = fake.phone_number()  # Generate a random phone number for caller
+        called_number = fake.phone_number()  # Generate a random phone number for callee
+        created_at = fake.date_time_this_year()  # Generate a random date-time within the current year
+        call_id = str(uuid.uuid4())  # Generate a unique UUID for call_id
+        event_id = str(uuid.uuid4())  # Generate a unique UUID for event_id
+
+        # Generate a random duration for all events
+        duration = random.randint(1, 30)  # Random duration between 1 and 30 seconds
+
+        # Create a new CallEvent object with the generated data
+        CallEvent.objects.create(
+            event_id=event_id,
+            call_id=call_id,
+            event=event,
+            calling_number=calling_number,
+            called_number=called_number,
+            created_at=created_at,
+            duration=duration  # Assign the random duration
+        )
+
+if __name__ == '__main__':
+    create_test_data()
+    print("Test data created successfully.")
+```
+
+**models.py**
+this `CallEvent` model defines the structure and characteristics of the data stored for each phone call event in the API. 
+
+It ensures that each call event has a unique identifier, captures relevant information such as event type, phone numbers, timestamps, and duration (if available). 
+
+```
+import uuid
+from django.db import models
+
+class CallEvent(models.Model):
+    event_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    call_id = models.CharField(max_length=255)
+    event = models.CharField(max_length=20)
+    calling_number = models.CharField(max_length=20)
+    called_number = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    duration = models.IntegerField(null=True, blank=True)  # Add the duration field
+
+    def __str__(self):
+        return f"CallEvent {self.call_id}"
+```
+
+**calculate_call_history.py**
+`calculate_call_history.py` complements `create_test_data.py` by analyzing `CallEvent` instances in the API. 
+It computes call statuses ('Completed', 'Missed Inbound', 'Missed Outbound', 'Initiated') and durations, offering insights into the API's functionality. 
+And together with `create_test_data.py`, it forms a cycle for generating test data and extracting metrics, aiding in API testing. 
+
+**admin.py**
+This controls the Django admin interface for the CallEvent model. 
+It specifies the fields to display, adds filters and search functionality, and provides custom methods to calculate the call status and duration for each CallEvent
+```
+from django.contrib import admin
+from django.utils import timezone
+from .models import CallEvent
+
+# Admin configuration for the CallEvent model.
+class CallEventAdmin(admin.ModelAdmin):
+    # Fields to display in the admin list view
+    list_display = ('call_id', 'event', 'calling_number', 'called_number', 'created_at', 'get_call_status', 'get_duration')
+    # Filters for the admin list view    
+    list_filter = ('event',)
+    # Search fields for the admin list view
+    search_fields = ('call_id', 'calling_number', 'called_number')
+
+    def get_call_status(self, obj): 
+    # Returns the call status based on the event type.
+        
+        if obj.event == 'INITIATE':
+            return 'Missed Outbound'
+        elif obj.event == 'ANSWER':
+            return 'Completed Inbound'
+        elif obj.event == 'DISCONNECT':
+            return 'Completed Outbound'
+        else:
+            return 'Unknown'
+
+    # Customizes the display name for the 'get_call_status' function
+    get_call_status.short_description = 'Call Status'
+
+    def get_duration(self, obj):
+    #  Returns the duration of the call in seconds for completed calls.
+    # Logic to calculate the duration of the call
+        if obj.event == 'DISCONNECT':
+            delta = timezone.now() - obj.created_at
+            return int(delta.total_seconds())
+        else:
+            return None
+    # Customizes the display name for the 'get_duration' function
+    get_duration.short_description = 'Duration (seconds)'
+
+# Register the CallEvent model with the custom admin configuration
+admin.site.register(CallEvent, CallEventAdmin)
+```
