@@ -1,7 +1,23 @@
 # super-duper-phone-goggles
 This repository hosts a RESTful API built with Python and Django, designed to efficiently manage phone call states.
+Instead of relying on traditional databases like PostgreSQL or SQLite, we utilize Python scripts to generate random data.
 
-## Features
+The data used for testing and populating the API endpoints is randomly generated using Python scripts. 
+This approach offers several advantages:
+
+**1. Flexibility and Speed:**
+- Python scripts allow for quick and flexible data generation without the need to set up and maintain a separate database system.
+- Changes to the data schema or structure can be easily accommodated by modifying the Python scripts.
+
+**Isolation and Independence:**
+- Test data generation is independent of external dependencies, reducing the complexity of setting up testing environments.
+- Developers can work in isolated environments without worrying about the state of a shared database.
+
+**Reduced Overhead and Dependencies:**
+- Eliminates the need for managing and maintaining additional database instances solely for testing purposes.
+- Developers can focus more on writing and testing code, rather than managing databases.
+
+**## Features**
 1. Capture real-time phone call events from an external system and store them.
 2. Provide a detailed call history for any given phone number.
    
