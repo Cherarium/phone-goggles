@@ -144,6 +144,7 @@ This script uses the faker library to create random phone call events.
 The generated data will be visible in the Django admin portal.
 
 **Deployment Steps**
+
 Set environment variables.
 Start the development server:
 ```
