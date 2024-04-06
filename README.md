@@ -1,12 +1,12 @@
 # super-duper-phone-goggles
 This is a RESTful API using Python/Django to manage phone call states.
 
-The API has two main functions:
+## The API has two main functions:
 
 1. Capture real-time phone call events from an external system, and store them in a database.
 2. Provide access to comprehensive call history for a given phone number.
 
-##  **Part 1 - Event Processing:** 
+**Part 1 - Event Processing:** 
 
 Implement an API endpoint to process events for the following attributes:
 - event_id: Unique identifier for the event.
@@ -16,9 +16,7 @@ Implement an API endpoint to process events for the following attributes:
 - called_number: Called phone number in E.164 format.
 - created_at: Date of the event.
 
-## H2
-**Part 2 - Call History:**
-## H2
+**Part 2 - Call History**
 
 Expose call history for a given phone number.
 Each record includes:
@@ -27,10 +25,7 @@ Counterparty phone number.
 Call status (Completed Inbound, Missed Inbound, Completed Outbound, Missed Outbound).
 Duration in seconds for completed calls.
 
-
-## H2
-**Installation**:
-## H2
+## **Installation**
 
 Requirements:
 - Python
@@ -50,8 +45,7 @@ Activate the virtual environment:
 - On macOS/Linux: source venv/bin/activate
  - Install dependencies: `python -m pip install Django`, `pip install pylance`, `pip install Faker` `pip install djangorestframework`
 
-## H2
-**Usage:**
+## **Usage:**
 
 Endpoints:
 Endpoint for processing phone call events.
@@ -73,7 +67,7 @@ To create a superuser account input:
 Follow the prompts to set a username and password.
 
 
-##H2 **Call History:**
+## **Call History:**
 Endpoint: /call-history/<input_phone_number>/
 Attributes:
 - call_time: Time of the call.
@@ -81,9 +75,8 @@ Attributes:
 - call_status: Status of the call (Completed Inbound, Missed Inbound, Completed Outbound, Missed Outbound).
 - duration: Duration in seconds for completed calls.
 
-Example:
-
-Request: 
+**Example:**
+Expected Request: 
 ```
 GET /call-history/+1234567890/
 ```
