@@ -26,14 +26,14 @@ Call status (Completed Inbound, Missed Inbound, Completed Outbound, Missed Outbo
 Duration in seconds for completed calls.
 
 ## **Installation**
-
+```
 Requirements:
 - Python
 - Django
 - pylance
 - Faker
 - Djangorestframework
-
+```
 **Setup:**
 
 Clone the repository: git clone https://github.com/Cherarium/super-duper-phone-goggles
@@ -41,9 +41,9 @@ Clone the repository: git clone https://github.com/Cherarium/super-duper-phone-g
 - Create a virtual environment: `python3 -m venv venv`
 
 Activate the virtual environment:
-- On Windows: venv\Scripts\activate
-- On macOS/Linux: source venv/bin/activate
- - Install dependencies: `python -m pip install Django`, `pip install pylance`, `pip install Faker` `pip install djangorestframework`
+- On Windows: `venv\Scripts\activate`
+- On macOS/Linux: `source venv/bin/activate`
+- Install dependencies: `python -m pip install Django`, `pip install pylance`, `pip install Faker` `pip install djangorestframework`
 
 ## **Usage:**
 
@@ -58,14 +58,16 @@ Attributes:
 - called_number
 - created_at.
 
-Endpoint for accessing call history(s): http://127.0.0.1:8000/admin/calls/callevent/
+Endpoint for accessing call history(s): `http://127.0.0.1:8000/admin/calls/callevent/`
+
 ![image](https://github.com/Cherarium/super-duper-phone-goggles/assets/55898764/59224218-e0ea-4598-add3-a112f5e25132)
 
 **The API uses Token Authentication.**
 To create a superuser account input:
-`python manage.py createsuperuser`
-Follow the prompts to set a username and password.
-
+```
+python manage.py createsuperuser
+```
+Then follow the prompts to set a username and password.
 
 ## **Call History:**
 Endpoint: /call-history/<input_phone_number>/
