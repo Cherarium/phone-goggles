@@ -215,7 +215,7 @@ This script defines the structure and characteristics of the data stored for eac
 
 It ensures that each call event has a unique identifier, captures relevant information such as event type, phone numbers, timestamps, and duration (if available). 
 
-```
+```python
 import uuid
 from django.db import models
 
@@ -246,7 +246,7 @@ This script controls the Django admin interface for the `CallEvent` model.
 
 It specifies the fields to display, adds filters and search functionality, and provides custom methods to calculate the call status and duration for each `CallEvent`
 
-```
+```python
 from django.contrib import admin
 from django.utils import timezone
 from .models import CallEvent
