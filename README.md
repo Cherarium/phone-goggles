@@ -99,3 +99,36 @@ Expected Response:
   }
 ]
 ```
+## **Error Handling**
+
+HTTP Status Codes:
+- 200 OK: Successful request.
+- 400 Bad Request: Invalid request parameters.
+- 401 Unauthorized: Missing or invalid authentication token.
+- 404 Not Found: Resource not found.
+
+Error Responses:
+- Error responses will be in JSON format, providing details about the error.
+
+
+## **Data Generation & Deployment**
+To generate test data, run:
+```
+python create_test_data.py
+```
+This script uses the faker library to create random phone call events.
+After execution, the generated data will be visible in the Django admin portal.
+
+Deployment Steps:
+Set environment variables.
+Start the development server:
+```
+python manage.py runserver
+```
+The API will be accessible at: `http://127.0.0.1:8000/admin/` and login with your super credential. 
+
+## References
+
+References:
+Django Documentation: https://docs.djangoproject.com/en/stable/
+E.164 Format Specification: https://en.wikipedia.org/wiki/E.164 
