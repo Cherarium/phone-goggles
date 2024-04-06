@@ -19,7 +19,7 @@ This approach offers several advantages:
 - Eliminates the need for managing and maintaining additional database instances solely for testing purposes.
 - Developers can focus more on writing and testing code, rather than managing databases.
 
-**## Features**
+## **Features**
 1. Capture real-time phone call events from an external system and store them.
 2. Provide a detailed call history for any given phone number.
    
