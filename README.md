@@ -35,7 +35,7 @@ Implements an API endpoint to handle the following event attributes:
 
 **Event Behaviors:**
 **"INITIATE" and "ANSWER" Events:**
-- These events are occasionally marked with a dash `-`, indicating their immediate nature. This possibly indicates calls that have not yet been completed. They occur promptly, reflecting the initiation and answering of phone calls.
+- These events are occasionally marked with a dash `-`, indicating their immediate nature. This possibly indicates calls that have not yet been completed.
 
 **"DISCONNECT" Events:**
 - In contrast, `DISCONNECT` events are distinguished by a set amount of seconds until a call is terminated. When a call is `DISCONNECTED`, you calculate the duration by subtracting the `created_at` timestamp of the `DISCONNECT` event from the `created_at` timestamp of the `INITIATE` event.
