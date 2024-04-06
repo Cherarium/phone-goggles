@@ -1,6 +1,7 @@
 # super-duper-phone-goggles
 This repository hosts a RESTful API built with Python and Django, designed to efficiently manage phone call states.
-Instead of relying on traditional databases like PostgreSQL or SQLite, we utilize Python scripts to generate random data.
+
+Instead of relying on traditional databases like PostgreSQL or SQLite, this app utilizes Python scripts to generate random data.
 
 The data used for testing and populating the API endpoints is randomly generated using Python scripts. 
 This approach offers several advantages:
