@@ -1,4 +1,4 @@
-# super-duper-phone-goggles
+# phone-goggles
 This repository hosts a RESTful API built with Python and Django, designed to efficiently manage phone call states.
 
 Instead of relying on traditional databases like PostgreSQL or SQLite, this app utilizes Python scripts to generate random data.
@@ -66,7 +66,7 @@ Exposes the call history for a phone number, including:
   **Setup**
 1. Clone the repository:
 ```
-git clone https://github.com/Cherarium/super-duper-phone-goggles
+git clone https://github.com/Cherarium/phone-goggles
 cd super-duper-phone-goggles
 ```
 2. Create and activate a virtual environment:
