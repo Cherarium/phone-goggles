@@ -11,11 +11,11 @@ This approach offers several advantages:
 - Python scripts allow for quick and flexible data generation without the need to set up and maintain a separate database system.
 - Changes to the data schema or structure can be easily accommodated by modifying the Python scripts.
 
-**Isolation and Independence:**
+**2. Isolation and Independence:**
 - Test data generation is independent of external dependencies, reducing the complexity of setting up testing environments.
 - Developers can work in isolated environments without worrying about the state of a shared database.
 
-**Reduced Overhead and Dependencies:**
+**3. Reduced Overhead and Dependencies:**
 - Eliminates the need for managing and maintaining additional database instances solely for testing purposes.
 - Developers can focus more on writing and testing code, rather than managing databases.
 
