@@ -67,7 +67,7 @@ Exposes the call history for a phone number, including:
 1. Clone the repository:
 ```
 git clone https://github.com/Cherarium/phone-goggles
-cd super-duper-phone-goggles
+cd phone-goggles
 ```
 2. Create and activate a virtual environment:
 ```
