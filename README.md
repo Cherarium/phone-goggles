@@ -46,12 +46,12 @@ Expose the call history for a phone number, including:
 - Djangorestframework
 
   **Setup**
-  1. Clone the repository:
+1. Clone the repository:
 ```
 git clone https://github.com/Cherarium/super-duper-phone-goggles
 cd super-duper-phone-goggles
 ```
-  2. Create and activate a virtual environment:
+2. Create and activate a virtual environment:
 ```
 python3 -m venv venv
 # On Windows:
