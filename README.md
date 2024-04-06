@@ -158,9 +158,10 @@ E.164 Format Specification: https://en.wikipedia.org/wiki/E.164
 
 ## CODE ANALYSIS
 **create_test_data.py**
+
 This script creates random test data for the `CallEvent` model, simulating various phone call scenarios for testing the API.
 
-```
+```python
 import os
 import random
 import django
@@ -209,7 +210,8 @@ if __name__ == '__main__':
 ```
 
 **models.py**
-this `CallEvent` model defines the structure and characteristics of the data stored for each phone call event in the API. 
+
+This script defines the structure and characteristics of the data stored for each phone call event in the API. 
 
 It ensures that each call event has a unique identifier, captures relevant information such as event type, phone numbers, timestamps, and duration (if available). 
 
@@ -231,13 +233,19 @@ class CallEvent(models.Model):
 ```
 
 **calculate_call_history.py**
+
 `calculate_call_history.py` complements `create_test_data.py` by analyzing `CallEvent` instances in the API. 
+
 It computes call statuses ('Completed', 'Missed Inbound', 'Missed Outbound', 'Initiated') and durations, offering insights into the API's functionality. 
+
 And together with `create_test_data.py`, it forms a cycle for generating test data and extracting metrics, aiding in API testing. 
 
 **admin.py**
-This controls the Django admin interface for the CallEvent model. 
-It specifies the fields to display, adds filters and search functionality, and provides custom methods to calculate the call status and duration for each CallEvent
+
+This script controls the Django admin interface for the `CallEvent` model.
+
+It specifies the fields to display, adds filters and search functionality, and provides custom methods to calculate the call status and duration for each `CallEvent`
+
 ```
 from django.contrib import admin
 from django.utils import timezone
