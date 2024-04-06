@@ -1,14 +1,13 @@
 # super-duper-phone-goggles
-This is a RESTful API using Python/Django to manage phone call states.
+This repository hosts a RESTful API built with Python and Django, designed to efficiently manage phone call states.
 
-## The API has two main functions:
+## Features
+1. Capture real-time phone call events from an external system and store them.
+2. Provide a detailed call history for any given phone number.
+   
+## Part 1 - Event Processing
+Implement an API endpoint to handle the following event attributes:
 
-1. Capture real-time phone call events from an external system, and store them in a database.
-2. Provide access to comprehensive call history for a given phone number.
-
-**Part 1 - Event Processing:** 
-
-Implement an API endpoint to process events for the following attributes:
 - event_id: Unique identifier for the event.
 - call_id: Unique identifier for the call.
 - event: Values can be INITIATE, ANSWER, or DISCONNECT.
@@ -16,73 +15,81 @@ Implement an API endpoint to process events for the following attributes:
 - called_number: Called phone number in E.164 format.
 - created_at: Date of the event.
 
-**Part 2 - Call History**
+**Event Behaviors:**
+**"INITIATE" and "ANSWER" Events:**
+- These events are occasionally marked with a dash `-`, indicating their immediate nature. This possibly indicates calls that have not yet been completed. They occur promptly, reflecting the initiation and answering of phone calls.
 
-Expose call history for a given phone number.
-Each record includes:
-Call time.
-Counterparty phone number.
-Call status (Completed Inbound, Missed Inbound, Completed Outbound, Missed Outbound).
-Duration in seconds for completed calls.
+**"DISCONNECT" Events:**
+- In contrast, `DISCONNECT` events are distinguished by a set amount of seconds until a call is terminated. When a call is `DISCONNECTED`, you calculate the duration by subtracting the `created_at` timestamp of the `DISCONNECT` event from the `created_at` timestamp of the `INITIATE` event.
 
-## **Installation**
-```
-Requirements:
+**Interpreting `-` Duration in Ongoing Calls:**
+- If you're seeing `-` for duration in `initiate` and `answer` events, it might indicate that these calls are still ongoing or have not yet been completed at the time the test data was generated.
+
+**Real-World Insight:**
+In a real-world scenario, the duration field would primarily be meaningful for `DISCONNECT` events. This is when a call reaches its conclusion, providing the complete information needed to calculate the duration of the call.
+
+
+## Part 2 - Call History
+Expose the call history for a phone number, including:
+
+- Call time.
+- Counterparty phone number.
+- Call status (Completed Inbound, Missed Inbound, Completed Outbound, Missed Outbound).
+- Duration in seconds for completed calls.
+
+## Installation
+**Requirements**
 - Python
 - Django
 - pylance
 - Faker
 - Djangorestframework
+
+  **Setup**
+  1. Clone the repository:
 ```
-**Setup:**
+git clone https://github.com/Cherarium/super-duper-phone-goggles
+cd super-duper-phone-goggles
+```
+  2. Create and activate a virtual environment:
+```
+python3 -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+3. Install dependencies:
+```
+python -m pip install Django
+pip install pylance Faker djangorestframework
+```
 
-Clone the repository: git clone https://github.com/Cherarium/super-duper-phone-goggles
-- Navigate to the project directory: `cd super-duper-phone-goggles`
-- Create a virtual environment: `python3 -m venv venv`
+## Usage
+Endpoints
 
-Activate the virtual environment:
-- On Windows: `venv\Scripts\activate`
-- On macOS/Linux: `source venv/bin/activate`
-- Install dependencies: `python -m pip install Django`, `pip install pylance`, `pip install Faker` `pip install djangorestframework`
+- Event Processing:
+  - Endpoint: /process-events/
+  - Attributes: event_id, call_id, event, calling_number, called_number, created_at.
+- Call History:
+  - Endpoint: /call-history/<input_phone_number>/
 
-## **Usage:**
-
-Endpoints:
-Endpoint for processing phone call events.
-
-Attributes:
-- event_id
-- call_id
-- event
-- calling_number
-- called_number
-- created_at.
-
-Endpoint for accessing call history(s): `http://127.0.0.1:8000/admin/calls/callevent/`
-
-![image](https://github.com/Cherarium/super-duper-phone-goggles/assets/55898764/59224218-e0ea-4598-add3-a112f5e25132)
-
-**The API uses Token Authentication.**
-To create a superuser account input:
+**Authentication**
+The API uses Token Authentication. To create a superuser account:
 ```
 python manage.py createsuperuser
 ```
-Then follow the prompts to set a username and password.
+Follow the prompts to set a username and password.
 
-## **Call History:**
-Endpoint: /call-history/<input_phone_number>/
-Attributes:
-- call_time: Time of the call.
-- counterparty_number: Counterparty phone number.
-- call_status: Status of the call (Completed Inbound, Missed Inbound, Completed Outbound, Missed Outbound).
-- duration: Duration in seconds for completed calls.
+## Accessing Call History
+Endpoint: http://127.0.0.1:8000/admin/calls/callevent/
+![image](https://github.com/Cherarium/super-duper-phone-goggles/assets/55898764/ecc16a3f-3342-41bf-949a-d846b83bea29)
 
-**Example:**
-Expected Request: 
+Example request: 
 ```
 GET /call-history/+1234567890/
 ```
-Expected Response: 
+Example Response:
 ```
 [
   {
@@ -99,36 +106,33 @@ Expected Response:
   }
 ]
 ```
-## **Error Handling**
+## Error Handling
 
-HTTP Status Codes:
+**HTTP Status Codes**
 - 200 OK: Successful request.
 - 400 Bad Request: Invalid request parameters.
 - 401 Unauthorized: Missing or invalid authentication token.
 - 404 Not Found: Resource not found.
-
-Error Responses:
+ 
+**Error Responses**
 - Error responses will be in JSON format, providing details about the error.
 
-
-## **Data Generation & Deployment**
+## Data Generation & Deployment
 To generate test data, run:
 ```
 python create_test_data.py
 ```
 This script uses the faker library to create random phone call events.
-After execution, the generated data will be visible in the Django admin portal.
+The generated data will be visible in the Django admin portal.
 
-Deployment Steps:
+**Deployment Steps**
 Set environment variables.
 Start the development server:
 ```
 python manage.py runserver
 ```
-The API will be accessible at: `http://127.0.0.1:8000/admin/` and login with your super credential. 
+The API will be accessible at: http://127.0.0.1:8000/admin/ after logging in with your superuser credentials.
 
-## References
-
-References:
+##References
 Django Documentation: https://docs.djangoproject.com/en/stable/
-E.164 Format Specification: https://en.wikipedia.org/wiki/E.164 
+E.164 Format Specification: https://en.wikipedia.org/wiki/E.164
