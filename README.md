@@ -100,8 +100,10 @@ python manage.py createsuperuser
 Follow the prompts to set a username and password.
 
 ## Accessing Call History
-Endpoint: http://127.0.0.1:8000/admin/calls/callevent/
 ![image](https://github.com/Cherarium/super-duper-phone-goggles/assets/55898764/ecc16a3f-3342-41bf-949a-d846b83bea29)
+
+Django Admin CallEvent Interface: http://127.0.0.1:8000/admin/calls/callevent/
+
 
 Example request: 
 ```
