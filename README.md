@@ -140,7 +140,7 @@ If the application were to utilize a backend database such as SQLite or PostgreS
 
 And, the endpoints would continue to return the defined JSON structures as demonstrated (in the examples). 
 
-```
+
 ## Error Handling
 
 **HTTP Status Codes**
