@@ -125,6 +125,21 @@ Example Response:
     "duration": null
   }
 ]
+
+**NOTE:**
+ 
+**Clarification on Generated Data Source:**
+
+The provided examples for requests/responses are based on data generated from a Python script `(create_test_data.py)` rather than a traditional database.
+
+In this context, the expected outcomes may differ from standard database-driven results.
+
+**Expected Outcome with Database Backend:**
+
+If the application were to utilize a backend database such as SQLite or PostgreSQL, the examples provided (above) would align with the expected responses noted.
+
+And, the endpoints would continue to return the defined JSON structures as demonstrated (in the examples). 
+
 ```
 ## Error Handling
 
