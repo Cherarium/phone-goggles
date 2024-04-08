@@ -63,7 +63,7 @@ Exposes the call history for a phone number, including:
 - Faker
 - Djangorestframework
 
-  **Setup**
+## **Setup**
 1. Clone the repository:
 ```
 git clone https://github.com/Cherarium/phone-goggles
